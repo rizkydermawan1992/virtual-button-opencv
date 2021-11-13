@@ -17,9 +17,9 @@ fpsReader = FPS()
 fps = fpsReader.update()
 
 detector  = HandDetector(detectionCon=0.7)
-pinR, pinY, pinG = 4, 3, 2
-port = 'COM7' #Select your COM
-board = pyfirmata.Arduino(port)
+# pinR, pinY, pinG = 4, 3, 2
+# port = 'COM7' #Select your COM
+# board = pyfirmata.Arduino(port)
 
 counter_R, counter_Y, counter_G = 0, 0, 0
 R_on, Y_on, G_on = False, False, False
@@ -39,8 +39,8 @@ while True:
         posFinger = [fx, fy]
         cv2.circle(img, (fx, fy), 15, (255, 0, 255), cv2.FILLED) #draw circle on index fingertip
         cv2.putText(img, str(posFinger), (fx+10, fy-10), cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 0), 3)
-        # cv2.line(img, (fx-x_max, fy), (fx+x_max, fy), (255,255,0), 2) # x line
-        # cv2.line(img, (fx, fy+y_max), (fx, fy-y_max), (255, 255, 0), 2)# y line
+        cv2.line(img, (0, fy), (x_max, fy), (255,255,0), 2) # x line
+        cv2.line(img, (fx, y_max), (fx, 0), (255, 255, 0), 2)# y line
 
 
         if x < fx < x + w - 95 and y < fy < y + h - 95:
@@ -99,9 +99,9 @@ while True:
                             5, (0, 255, 0), 5)
 
 
-        board.digital[pinR].write(R_val)
-        board.digital[pinY].write(Y_val)
-        board.digital[pinG].write(G_val)
+        # board.digital[pinR].write(R_val)
+        # board.digital[pinY].write(Y_val)
+        # board.digital[pinG].write(G_val)
 
 
     cv2.imshow("Image", img)
